@@ -17,6 +17,19 @@
 		html {
 			scroll-behavior: smooth;
 		}
+		
+		/* Terminal CSS */
+		.terminal-autocomplete li {
+			padding: 8px 15px;
+			color: #e0e0e0;
+			cursor: pointer;
+			font-size: 1.1rem;
+		}
+		.terminal-autocomplete li:hover,
+		.terminal-autocomplete li.active {
+			background: #333;
+			color: #27c93f;
+		}
 	</style>
 
 </head>
@@ -53,14 +66,25 @@
 			<div class="row intro-text align-items-center justify-content-center">
 				<div class="col-md-10 text-center pt-5" style="margin-top: 250px;">
 					<h1 class="site-heading site-animate" style="color: white; margin-bottom: 30px;">Hello, I'm <strong class="d-block">Adarsh Gupta</strong></h1>
-					<div class="terminal-box site-animate" style="background: rgba(0,0,0,0.85); padding: 20px; border-radius: 8px; border: 1px solid #333; font-family: monospace; display: inline-block; text-align: left; max-width: 800px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+					<div class="terminal-box site-animate interactive-terminal" style="background: rgba(0,0,0,0.85); padding: 20px; border-radius: 8px; border: 1px solid #333; font-family: monospace; display: inline-block; text-align: left; max-width: 1000px; width: 100%; min-height: 280px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative;">
 						<div class="terminal-header" style="border-bottom: 1px solid #444; padding-bottom: 10px; margin-bottom: 15px;">
 							<span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#ff5f56; margin-right:5px;"></span>
 							<span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#ffbd2e; margin-right:5px;"></span>
 							<span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#27c93f;"></span>
 						</div>
-						<p style="color: #27c93f; font-size: 1.2rem; margin-bottom: 10px;">$ adarsh --status</p>
-						<p style="color: #e0e0e0; font-size: 1.1rem; line-height: 1.6; margin-bottom: 0;">> Currently breaking local code, optimizing real-time loops, and building things that shouldn't work, but do.</p>
+						
+						<div class="terminal-body" style="position: relative;">
+							<div class="terminal-input-line" style="display: flex; align-items: center; color: #27c93f; font-size: 1.2rem; margin-bottom: 10px; position: relative;">
+								<span style="margin-right: 8px;">$ adarsh</span>
+								<input type="text" id="terminal-input" autocomplete="off" spellcheck="false" value="--help" style="background: transparent; border: none; color: #27c93f; font-family: monospace; font-size: 1.2rem; outline: none; flex: 1; caret-color: #27c93f;">
+							</div>
+							
+							<ul id="terminal-autocomplete" class="terminal-autocomplete" style="display: none; position: absolute; top: 30px; left: 80px; background: rgba(30, 30, 30, 0.95); border: 1px solid #444; border-radius: 4px; list-style: none; padding: 5px 0; margin: 0; min-width: 250px; z-index: 100;">
+								<!-- Autocomplete items inserted via JS -->
+							</ul>
+							
+							<div id="terminal-output" style="color: #e0e0e0; font-size: 1.1rem; line-height: 1.6; margin-bottom: 0; white-space: pre-wrap;"></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -201,25 +225,7 @@
 					<p class="mb-4">I’m a chronic tinkerer who is permanently addicted to the learning curve. I’ve spent my time training voice bots to navigate chaotic real-world conversations, spinning up decentralized VoIP streams, and leading engineering sprints where none of us had the full map. I don’t have all the answers, but I’m built to figure them out in real time. If you're looking for a rigid, play-it-safe engineer, you're in the wrong place—I'm here to aggressively learn, build cool stuff, and embrace the chaos of the process.</p>
 				</div>
 			</div>
-			
-			<div class="row justify-content-center">
-				<div class="col-md-10 text-center">
-					<div class="terminal-box site-animate" style="background: rgba(0,0,0,0.85); padding: 20px; border-radius: 8px; border: 1px solid #333; font-family: monospace; display: inline-block; text-align: left; max-width: 800px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-						<div class="terminal-header" style="border-bottom: 1px solid #444; padding-bottom: 10px; margin-bottom: 15px;">
-							<span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#ff5f56; margin-right:5px;"></span>
-							<span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#ffbd2e; margin-right:5px;"></span>
-							<span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#27c93f;"></span>
-						</div>
-						<p style="color: #27c93f; font-size: 1.2rem; margin-bottom: 10px;">$ adarsh --version</p>
-						<p style="color: #e0e0e0; font-size: 1.1rem; line-height: 1.6; margin-bottom: 0;">
-							<span style="color: #ffbd2e; display: block; margin-bottom: 10px;">v2.0.26-nightly (Experimental Patch)</span>
-							<span style="display: block;"><span style="color: #ff5f56;">[🛑 ERROR]</span>  thermal_throttling: Local GPU hit 69°C while running LLMs models locally for no reason.</span>
-							<span style="display: block;"><span style="color: #ffbd2e;">[⚠️ WARNING]</span> Hates to do repetitive tasks.</span>
-							<span style="display: block;"><span style="color: #27c93f;">[💡 STATUS]</span>  System running purely on curiosity and a stubborn refusal to give up.</span>
-						</p>
-					</div>
-				</div>
-			</div>
+
 
 		</div>
 	</section>
@@ -315,6 +321,7 @@
 	<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 	<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 	<script src="js/custom.js"></script>
+	<script src="js/terminal.js"></script>
 
 	<!-- Google Map -->
     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
