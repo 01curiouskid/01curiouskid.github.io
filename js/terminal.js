@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const terminalBox = document.querySelector('.interactive-terminal');
 
     const commands = {
-        '--help': `Available commands:\n  --status\n  --version\n  --git-blame\n  --pip-install-perfection\n  --sudo-rm-problems\n  --check-coffee\n  --run-weekend-prototype\n\nUse Up/Down arrows to select a command, then press Enter.`,
+        '--help': `Available commands:\n  --status\n  --version\n  --git-blame\n  --pip-install-perfection\n  --sudo-rm-problems\n  --check-coffee\n  --run-weekend-prototype`,
         '--status': `> Currently breaking local code, optimizing real-time loops, and building things that shouldn't work, but do.`,
         '--version': `v2.0.26-nightly (Experimental Patch)\n\n<span style="color: #ff5f56;">[🛑 ERROR]</span> thermal_throttling: Local GPU hit 69°C while running LLMs models locally for no reason.\n<span style="color: #ffbd2e;">[⚠️ WARNING]</span> hates to do repetitive tasks.\n<span style="color: #27c93f;">[💡 STATUS]</span> system running purely on curiosity and a stubborn refusal to give up.`,
         '--git-blame': `> Locating the absolute disaster who broke the prod pipeline.\n<span style="color: #ff5f56;">[🛑 ERROR]</span> identity_crisis: The git history confirms I am the one who wrote this terrible code 3 hours ago.\n<span style="color: #ffbd2e;">[⚠️ WARNING]</span> do not judge my past self, I was operating on 2% brain capacity.\n<span style="color: #27c93f;">[💡 STATUS]</span> system rewriting the entire script from scratch because pride is deprecated.`,
@@ -157,5 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial State: --help pre-filled, input focused, dropdown visible
     input.focus();
+    input.setSelectionRange(input.value.length, input.value.length);
     renderAutocomplete();
 });
