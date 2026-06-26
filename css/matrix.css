@@ -1,0 +1,210 @@
+/* CSS Overrides for the Matrix Digital Rain Theme */
+
+/* Canvas background container */
+#matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    pointer-events: none;
+    display: none;
+    background-color: #000;
+}
+
+body.matrix-active #matrix-canvas {
+    display: block;
+}
+
+/* Global body overrides when Matrix is active */
+body.matrix-active {
+    background-color: #000 !important;
+    color: #39ff14 !important;
+    text-shadow: 0 0 2px rgba(0, 255, 0, 0.3);
+}
+
+/* Selections */
+body.matrix-active ::selection {
+    background: #39ff14 !important;
+    color: #000 !important;
+}
+body.matrix-active ::-moz-selection {
+    background: #39ff14 !important;
+    color: #000 !important;
+}
+
+/* Section overrides */
+body.matrix-active .site-section {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+body.matrix-active .site-hero {
+    background-image: none !important;
+    background-color: transparent !important;
+}
+
+/* Header & Text Glows */
+body.matrix-active h1, 
+body.matrix-active h2, 
+body.matrix-active h3, 
+body.matrix-active h4, 
+body.matrix-active h5, 
+body.matrix-active h1 strong, 
+body.matrix-active h2 strong,
+body.matrix-active .site-heading {
+    color: #39ff14 !important;
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.8), 0 0 15px rgba(0, 255, 0, 0.4) !important;
+}
+
+/* Subtext colors */
+body.matrix-active p, 
+body.matrix-active span,
+body.matrix-active .lead {
+    color: #8aff8a !important;
+}
+
+/* Navbar Overrides */
+body.matrix-active .site-navbar {
+    background: transparent !important;
+    border-bottom: none !important;
+}
+
+body.matrix-active .site-navbar.scrolled {
+    background: rgba(0, 0, 0, 0.9) !important;
+    border-bottom: 1px solid #39ff14 !important;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.2) !important;
+}
+
+body.matrix-active .site-navbar .navbar-nav > li > a {
+    color: #39ff14 !important;
+}
+
+body.matrix-active .site-navbar .navbar-nav > li > a:hover {
+    color: #fff !important;
+    text-shadow: 0 0 10px #39ff14 !important;
+}
+
+body.matrix-active .site-navbar.scrolled .navbar-nav > li > a {
+    color: #39ff14 !important;
+}
+
+body.matrix-active .site-navbar .navbar-brand {
+    border-color: #39ff14 !important;
+    color: #39ff14 !important;
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.8) !important;
+}
+
+/* Resume and service cards */
+body.matrix-active .resume-item, 
+body.matrix-active .site-service-item {
+    background: rgba(0, 15, 0, 0.7) !important;
+    border: 1px solid #39ff14 !important;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3) !important;
+    transition: all 0.3s ease;
+}
+
+body.matrix-active .resume-item:hover, 
+body.matrix-active .site-service-item:hover {
+    box-shadow: 0 0 25px rgba(0, 255, 0, 0.6) !important;
+    background: rgba(0, 25, 0, 0.85) !important;
+}
+
+/* Resume items specific details */
+body.matrix-active .resume-item .date {
+    color: #39ff14 !important;
+}
+
+body.matrix-active .resume-item .school {
+    color: #39ff14 !important;
+    text-shadow: 0 0 4px rgba(0, 255, 0, 0.6) !important;
+}
+
+/* Forms & Inputs */
+body.matrix-active .form-control {
+    background: rgba(0, 10, 0, 0.8) !important;
+    border: 1px solid #39ff14 !important;
+    color: #39ff14 !important;
+}
+
+body.matrix-active .form-control::placeholder {
+    color: rgba(0, 255, 0, 0.4) !important;
+}
+
+body.matrix-active .form-control:focus {
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5) !important;
+    background: rgba(0, 20, 0, 0.9) !important;
+}
+
+/* Buttons */
+body.matrix-active .btn, 
+body.matrix-active .btn-primary {
+    background-color: #000 !important;
+    border-color: #39ff14 !important;
+    color: #39ff14 !important;
+    box-shadow: 0 0 8px rgba(0, 255, 0, 0.3) !important;
+    text-shadow: 0 0 4px rgba(0, 255, 0, 0.5) !important;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+body.matrix-active .btn:hover, 
+body.matrix-active .btn-primary:hover {
+    background-color: #39ff14 !important;
+    color: #000 !important;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.8) !important;
+    text-shadow: none !important;
+}
+
+/* Footer overrides */
+body.matrix-active .site-footer {
+    background: #000 !important;
+    border-top: 1px solid #39ff14 !important;
+    box-shadow: 0 -5px 15px rgba(0, 255, 0, 0.1) !important;
+}
+
+body.matrix-active .site-footer p, 
+body.matrix-active .site-footer a {
+    color: #39ff14 !important;
+}
+
+/* Filter buttons in projects section */
+body.matrix-active .portfolio-area .filters ul li {
+    color: #8aff8a !important;
+}
+
+body.matrix-active .portfolio-area .filters ul li.active {
+    color: #39ff14 !important;
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.8) !important;
+}
+
+body.matrix-active .portfolio-area .filters ul li:after {
+    background: #39ff14 !important;
+}
+
+/* Icon colors */
+body.matrix-active .icon span {
+    color: #39ff14 !important;
+}
+
+body.matrix-active .site-service-item .icon {
+    background: rgba(0, 30, 0, 0.8) !important;
+    border: 1px solid #39ff14 !important;
+}
+
+/* Custom matrix theme scrollbar */
+body.matrix-active::-webkit-scrollbar {
+    width: 12px;
+}
+body.matrix-active::-webkit-scrollbar-track {
+    background: #000;
+}
+body.matrix-active::-webkit-scrollbar-thumb {
+    background-color: #008000;
+    border-radius: 6px;
+    border: 3px solid #000;
+}
+body.matrix-active::-webkit-scrollbar-thumb:hover {
+    background-color: #39ff14;
+}
