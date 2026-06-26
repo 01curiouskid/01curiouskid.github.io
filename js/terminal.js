@@ -180,7 +180,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function executeCommand(cmd) {
         autocomplete.style.display = 'none';
         let response = commands[cmd];
-        if (!response) {
+        
+        if (cmd === '--whoami') {
+            response = `> Original Architecture by Adarsh Gupta.\n<span style="color: #27c93f;">[💡 SYSTEM]</span> All rights reserved.`;
+        } else if (!response) {
             response = `<span style="color: #ff5f56;">[🛑 ERROR]</span> Command not found: ${cmd}\nType --help to see available commands.`;
         }
         
