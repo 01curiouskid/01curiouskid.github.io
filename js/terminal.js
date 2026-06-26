@@ -5,13 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const terminalBox = document.querySelector('.interactive-terminal');
 
     const commands = {
-        '--help': `Available commands:\n  --status\n  --version\n  --git-blame\n  --pip-install-perfection\n  --sudo-rm-problems\n  --check-coffee\n  --run-weekend-prototype\n  --white-rabbit`,
+        '--help': `Available commands:\n  --status\n  --version\n  --git-blame\n  --pip-install-perfection\n  --sudo-rm-problems\n  --run-weekend-prototype\n  --white-rabbit`,
         '--status': `> Currently breaking local code, optimizing real-time loops, and building things that shouldn't work, but do.`,
         '--version': `v2.0.26-nightly (Experimental Patch)\n\n<span style="color: #ff5f56;">[🛑 ERROR]</span> thermal_throttling: Local GPU hit 69°C while running LLMs models locally for no reason.\n<span style="color: #ffbd2e;">[⚠️ WARNING]</span> hates to do repetitive tasks.\n<span style="color: #27c93f;">[💡 STATUS]</span> system running purely on curiosity and a stubborn refusal to give up.`,
         '--git-blame': `> Locating the absolute disaster who broke the prod pipeline.\n<span style="color: #ff5f56;">[🛑 ERROR]</span> identity_crisis: The git history confirms I am the one who wrote this terrible code 3 hours ago.\n<span style="color: #ffbd2e;">[⚠️ WARNING]</span> do not judge my past self, I was operating on 2% brain capacity.\n<span style="color: #27c93f;">[💡 STATUS]</span> system rewriting the entire script from scratch because pride is deprecated.`,
         '--pip-install-perfection': `> Collecting perfection...\n<span style="color: #ff5f56;">[🛑 ERROR]</span> HTTP_404_Not_Found: Could not find a version that satisfies the requirement 'perfection'.\n<span style="color: #ffbd2e;">[⚠️ WARNING]</span> this developer profile operates entirely on trial, error, and messy prototypes.\n<span style="color: #27c93f;">[💡 STATUS]</span> system successfully installed 'aggressive_learning' and 'raw_curiosity' instead.`,
         '--sudo-rm-problems': `> Executing global cleanup engine...\n<span style="color: #ff5f56;">[🛑 ERROR]</span> permission_denied: You cannot delete problems without reading the documentation first.\n<span style="color: #ffbd2e;">[⚠️ WARNING]</span> running away from a broken loop will not fix the sub-100ms latency target.\n<span style="color: #27c93f;">[💡 STATUS]</span> system swallowing its pride and debugging line by line.`,
-        '--check-coffee': `> Reading current chemical fuel status...\n<span style="color: #ff5f56;">[🛑 ERROR]</span> fluid_level_critical: Coffee level is currently at 0.0% and brain processing is slowing down.\n<span style="color: #ffbd2e;">[⚠️ WARNING]</span> syntax errors are expected to multiply exponentially over the next ten minutes.\n<span style="color: #27c93f;">[💡 STATUS]</span> system pausing execution to sprint to the kitchen before the next build crash.`,
         '--run-weekend-prototype': `> Spinning up a chaotic project just to see if it works.\n<span style="color: #ff5f56;">[🛑 ERROR]</span> import_error: Cannot find module 'patience'. It was never installed.\n<span style="color: #ffbd2e;">[⚠️ WARNING]</span> highly likely to drop this build midway if a cooler idea pops into my head.\n<span style="color: #27c93f;">[💡 STATUS]</span> system breaking code intentionally because a green terminal is boring anyway.`,
         '--white-rabbit': `> Follow the white rabbit... Wake up, Adarsh.\n<span style="color: #27c93f;">[💡 STATUS]</span> system overriding reality...`
     };
@@ -25,6 +24,61 @@ document.addEventListener('DOMContentLoaded', () => {
     terminalBox.addEventListener('click', () => {
         input.focus();
     });
+
+    // Terminal Window Buttons Logic
+    const btnClose = document.getElementById('term-btn-close');
+    const btnMax = document.getElementById('term-btn-max');
+    const termBubble = document.getElementById('terminal-bubble');
+    const heroHeading = document.querySelector('h1.site-heading');
+
+    let isMaximized = false;
+
+    if (btnClose && termBubble) {
+        btnClose.addEventListener('click', (e) => {
+            e.stopPropagation(); // prevent terminal click focus
+            
+            // Revert maximized state if active
+            if (isMaximized) {
+                isMaximized = false;
+                terminalBox.style.maxWidth = '1000px';
+                terminalBox.style.maxHeight = '';
+                terminalBox.style.height = '';
+                heroHeading.style.display = 'block';
+                btnMax.classList.remove('is-maximized');
+            }
+            
+            terminalBox.style.display = 'none';
+            termBubble.style.display = 'flex';
+        });
+
+        termBubble.addEventListener('click', () => {
+            terminalBox.style.display = 'inline-block';
+            termBubble.style.display = 'none';
+            input.focus();
+        });
+    }
+
+    if (btnMax && heroHeading) {
+        btnMax.addEventListener('click', (e) => {
+            e.stopPropagation(); // prevent terminal click focus
+            isMaximized = !isMaximized;
+            if (isMaximized) {
+                // Enlarge terminal and hide text
+                terminalBox.style.maxWidth = '100%';
+                terminalBox.style.maxHeight = '90vh';
+                terminalBox.style.height = '90vh';
+                heroHeading.style.display = 'none';
+                btnMax.classList.add('is-maximized');
+            } else {
+                // Revert
+                terminalBox.style.maxWidth = '1000px';
+                terminalBox.style.maxHeight = '';
+                terminalBox.style.height = '';
+                heroHeading.style.display = 'block';
+                btnMax.classList.remove('is-maximized');
+            }
+        });
+    }
 
     function renderAutocomplete() {
         const val = input.value.toLowerCase();
