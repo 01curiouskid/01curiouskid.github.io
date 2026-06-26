@@ -32,6 +32,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroHeading = document.querySelector('h1.site-heading');
 
     let isMaximized = false;
+    let isTerminalClosed = false;
+
+    function updateBubbleVisibility() {
+        if (isTerminalClosed || window.scrollY > window.innerHeight * 0.5) {
+            if (termBubble) termBubble.style.display = 'flex';
+        } else {
+            if (termBubble) termBubble.style.display = 'none';
+        }
+    }
+
+    if (termBubble) {
+        window.addEventListener('scroll', updateBubbleVisibility);
+    }
 
     if (btnClose && termBubble) {
         btnClose.addEventListener('click', (e) => {
@@ -48,13 +61,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             terminalBox.style.display = 'none';
-            termBubble.style.display = 'flex';
+            isTerminalClosed = true;
+            updateBubbleVisibility();
         });
 
         termBubble.addEventListener('click', () => {
+            isTerminalClosed = false;
             terminalBox.style.display = 'inline-block';
-            termBubble.style.display = 'none';
-            input.focus();
+            updateBubbleVisibility();
+            
+            // Smoothly scroll back to top so the terminal is visible
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Wait slightly for scroll to begin before focusing to prevent jarring jumps
+            setTimeout(() => input.focus(), 100);
         });
     }
 
